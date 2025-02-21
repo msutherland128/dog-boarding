@@ -7,6 +7,8 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
+import static com.msutherland128.dogboarding.constant.DogBoardingConstants.*;
+
 @Component
 public class ImportRoute extends RouteBuilder {
 
@@ -25,17 +27,18 @@ public class ImportRoute extends RouteBuilder {
     public void configure() throws Exception {
 
         from(applicationProperties.getInExcelDirectory())
-                .id("ExcelImportRoute")
+                .id(EXCEL_IMPORT_ROUTE)
                 .convertBodyTo(String.class)
                 .log(LoggingLevel.INFO, "Received ${headers.CamelFileName} file on excel import route")
                 .process(excelProcessor)
                 .end();
 
         from(applicationProperties.getInCsvDirectory())
-                .id("CSVImportRoute")
+                .id(CSV_IMPORT_ROUTE)
                 .convertBodyTo(String.class)
                 .log(LoggingLevel.INFO, "Received ${headers.CamelFileName} file on csv import route")
                 .process(csvProcessor)
+                .to("direct:MAIN_MENU_ROUTE")
                 .to(applicationProperties.getOutCsvDirectory())
                 .log(LoggingLevel.INFO, "Sent file to outCsvFiles directory")
                 .end();
