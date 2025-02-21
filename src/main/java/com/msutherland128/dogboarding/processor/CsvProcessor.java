@@ -31,7 +31,6 @@ public class CsvProcessor implements Processor {
                 if (x > 0) {
                     CsvContents csvrow = new CsvContents();
                     String[] csvColumns = csvRows[x].split(",");
-                    System.out.println("Printing csvColumns: " + csvColumns);
                     for (int y = 0; y < csvColumns.length; y++) {
                         if (y == 0) {
                             csvrow.setName(csvColumns[y]);
