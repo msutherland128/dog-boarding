@@ -33,4 +33,11 @@ public class CsvContents {
     public void setCost(Double cost) {
         this.cost = cost;
     }
+
+    @Override
+    public String toString() {
+        return  "Dog Name: " + name +
+                ", Boarding Date: " + date +
+                ", Cost: £" + cost;
+    }
 }
