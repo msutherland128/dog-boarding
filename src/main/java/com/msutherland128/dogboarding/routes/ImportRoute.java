@@ -39,7 +39,7 @@ public class ImportRoute extends RouteBuilder {
                 .log(LoggingLevel.INFO, "Received ${headers.CamelFileName} file on csv import route")
                 .process(csvProcessor)
                 .to("direct:MAIN_MENU_ROUTE")
-                .to(applicationProperties.getOutCsvDirectory())
+                //.to(applicationProperties.getOutCsvDirectory())
                 .log(LoggingLevel.INFO, "Sent file to outCsvFiles directory")
                 .end();
     }

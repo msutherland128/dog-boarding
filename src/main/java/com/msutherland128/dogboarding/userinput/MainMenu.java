@@ -48,10 +48,15 @@ public class MainMenu implements Processor {
                         printAllData(csvContents);
 
                     case 2:
-                        printAverageCost();
+                        printAverageCost(csvContents);
+
+                    case 3:
+                        printAverageCostPerDog();
+
+                    case 4:
+                        continueMenu =false;
                 }
 
-                continueMenu =false;
             }
 
             return csvContents;
@@ -59,13 +64,24 @@ public class MainMenu implements Processor {
 
 
     private void printAllData(ArrayList<CsvContents> csvContents) {
-        System.out.println("Printing all data... but how?");
+        System.out.println("Printing all data:");
         for(CsvContents row : csvContents) {
             System.out.println(row.toString());
         }
     }
 
-    private void printAverageCost() {
+    private void printAverageCost(ArrayList<CsvContents> csvContents) {
+        double runningTotal = 0;
+        for(CsvContents row : csvContents) {
+            runningTotal += row.getCost();
+        }
+        double averageCost = runningTotal/csvContents.size();
+        System.out.println("The average cost is: £" + averageCost);
+    }
+
+    private void printAverageCostPerDog() {
+        // todo - consider dogs with the same name. Implement an id into source file? Or DOB?
+
     }
 
 }
