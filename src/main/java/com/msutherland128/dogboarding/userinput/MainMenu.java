@@ -46,15 +46,20 @@ public class MainMenu implements Processor {
                 switch(mainMenuSelection) {
                     case 1:
                         printAllData(csvContents);
+                        break;
 
                     case 2:
                         printAverageCost(csvContents);
+                        break;
 
                     case 3:
                         printAverageCostPerDog();
+                        break;
 
-                    case 4:
-                        continueMenu =false;
+                    case 0:
+                        System.out.println("Exiting menu.");
+                        continueMenu = false;
+                        break;
                 }
 
             }
