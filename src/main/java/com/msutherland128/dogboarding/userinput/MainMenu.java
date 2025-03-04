@@ -1,6 +1,7 @@
 package com.msutherland128.dogboarding.userinput;
 
 import com.msutherland128.dogboarding.model.CsvContents;
+import com.msutherland128.dogboarding.processor.DataProcessor;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
@@ -12,9 +13,11 @@ import java.util.Scanner;
 public class MainMenu implements Processor {
 
     private CsvContents csvContents;
+    private DataProcessor dataProcessor;
 
-    public MainMenu(CsvContents csvContents) {
+    public MainMenu(CsvContents csvContents, DataProcessor dataProcessor) {
         this.csvContents = csvContents;
+        this.dataProcessor = dataProcessor;
     }
 
     @Override
@@ -45,15 +48,15 @@ public class MainMenu implements Processor {
 
                 switch(mainMenuSelection) {
                     case 1:
-                        printAllData(csvContents);
+                        dataProcessor.printAllData(csvContents);
                         break;
 
                     case 2:
-                        printAverageCost(csvContents);
+                        dataProcessor.printAverageCost(csvContents);
                         break;
 
                     case 3:
-                        printAverageCostPerDog();
+                        dataProcessor.printAverageCostPerDog();
                         break;
 
                     case 0:
@@ -66,28 +69,6 @@ public class MainMenu implements Processor {
 
             return csvContents;
         }
-
-
-    private void printAllData(ArrayList<CsvContents> csvContents) {
-        System.out.println("Printing all data:");
-        for(CsvContents row : csvContents) {
-            System.out.println(row.toString());
-        }
-    }
-
-    private void printAverageCost(ArrayList<CsvContents> csvContents) {
-        double runningTotal = 0;
-        for(CsvContents row : csvContents) {
-            runningTotal += row.getCost();
-        }
-        double averageCost = runningTotal/csvContents.size();
-        System.out.println("The average cost is: £" + averageCost);
-    }
-
-    private void printAverageCostPerDog() {
-        // todo - consider dogs with the same name. Implement an id into source file? Or DOB?
-
-    }
 
 }
 
