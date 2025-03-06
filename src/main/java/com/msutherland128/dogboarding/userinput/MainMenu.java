@@ -23,6 +23,8 @@ public class MainMenu implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
 
+        // todo - assign to String object rather than arrayList?
+        // String csvContents = exchange.getIn().getBody(String.class);
         ArrayList<CsvContents> csvContents = exchange.getIn().getBody(ArrayList.class);
         exchange.getIn().setBody(mainMenuOptions(csvContents));
 
@@ -56,7 +58,7 @@ public class MainMenu implements Processor {
                         break;
 
                     case 3:
-                        dataProcessor.printAverageCostPerDog();
+                        dataProcessor.printTotalCostPerDog(csvContents);
                         break;
 
                     case 0:

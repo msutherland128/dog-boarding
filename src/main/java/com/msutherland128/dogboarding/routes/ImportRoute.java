@@ -40,7 +40,7 @@ public class ImportRoute extends RouteBuilder {
                 .process(csvProcessor)
                 .to("direct:MAIN_MENU_ROUTE")
                 // todo resolve file conversion error sending to out csv dir
-                //.to(applicationProperties.getOutCsvDirectory())
+//                .to(applicationProperties.getOutCsvDirectory())
                 .log(LoggingLevel.INFO, "Sent file to outCsvFiles directory")
                 .end();
     }

@@ -28,6 +28,7 @@ public class CsvProcessor implements Processor {
             ArrayList<CsvContents> csvContents = new ArrayList<>();
 
             for (int x = 0; x < csvRows.length; x++) {
+                // ignore header row
                 if (x > 0) {
                     CsvContents csvrow = new CsvContents();
                     String[] csvColumns = csvRows[x].split(",");
