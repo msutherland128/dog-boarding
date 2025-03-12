@@ -37,8 +37,10 @@ public class CsvProcessor implements Processor {
                             csvrow.setName(csvColumns[y]);
                         } else if (y == 1) {
                             csvrow.setDate(csvColumns[y]);
-                        } else {
+                        } else if (y == 2) {
                             csvrow.setCost(Double.valueOf(csvColumns[y]));
+                        } else if (y == 3) {
+                            csvrow.setPayor(csvColumns[y]);
                         }
                     }
                     csvContents.add(csvrow);

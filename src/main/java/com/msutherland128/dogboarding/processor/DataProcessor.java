@@ -4,10 +4,17 @@ import com.msutherland128.dogboarding.model.CsvContents;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 @Component
 public class DataProcessor {
+
+//    private Scanner scanner;
+//
+//    public DataProcessor(Scanner scanner) {
+//        this.scanner = scanner;
+//    }
 
     public void printAllData(ArrayList<CsvContents> csvContents) {
         System.out.println("Printing all data:");
@@ -16,7 +23,7 @@ public class DataProcessor {
         }
     }
 
-    public double printAverageCost(ArrayList<CsvContents> csvContents) {
+    public void printAverageCost(ArrayList<CsvContents> csvContents) {
         double runningTotal = 0;
         for (CsvContents row : csvContents) {
             runningTotal += row.getCost();
@@ -24,7 +31,6 @@ public class DataProcessor {
         double averageCost = runningTotal / csvContents.size();
         System.out.println("The average cost is: £" + averageCost);
 
-        return averageCost;
     }
 
     public void printTotalCostPerDog(ArrayList<CsvContents> csvContents) {
@@ -51,6 +57,44 @@ public class DataProcessor {
             System.out.println("The total cost for " + userInput + " is £" + totalPerDog);
         }
 
+    }
+
+    public void printBreakdownByPayor(ArrayList<CsvContents> csvContents) {
+
+        System.out.print("Please enter the payor name: ");
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+
+        int counter = 0;
+        double totalCost = 0;
+        ArrayList<String> dogs = new ArrayList<>();
+
+        for (CsvContents row : csvContents) {
+            if (userInput.equalsIgnoreCase(row.getPayor())) {
+                totalCost += row.getCost();
+                dogs.add(row.getName());
+            } else {
+                counter++;
+            }
+        }
+
+        ArrayList<String> updatedDogsList = removeDuplicates(dogs);
+
+        if (counter == csvContents.size()){
+            System.out.println("No payor by name " + userInput + " found in file.");
+        } else {
+            System.out.println("The total cost for payor " + userInput + " is £" + totalCost);
+            System.out.println("The dogs associated to payor " + userInput + " are: " + updatedDogsList);
+        }
+
+    }
+
+    private <T>ArrayList<T> removeDuplicates(ArrayList<T> dogsArrayList) {
+        LinkedHashSet<T> set = new LinkedHashSet<>();
+        set.addAll(dogsArrayList);
+        dogsArrayList.clear();
+        dogsArrayList.addAll(set);
+        return dogsArrayList;
     }
 
 }

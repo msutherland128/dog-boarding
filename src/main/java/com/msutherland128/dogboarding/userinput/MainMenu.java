@@ -40,10 +40,12 @@ public class MainMenu implements Processor {
                 System.out.println("| 1. List all Data            |");
                 System.out.println("| 2. Average Cost             |");
                 System.out.println("| 3. Total per Dog            |");
+                System.out.println("| 4. Breakdown by Payor       |");
+                System.out.println("| 5. Summary by Payors        |");
                 System.out.println("| 0. Exit                     |");
                 System.out.println("+-----------------------------+");
 
-                System.out.print("Please, enter your option: ");
+                System.out.print("Please enter your option: ");
 
                 Scanner menuScanner = new Scanner(System.in);
                 int mainMenuSelection = menuScanner.nextInt();
@@ -59,6 +61,13 @@ public class MainMenu implements Processor {
 
                     case 3:
                         dataProcessor.printTotalCostPerDog(csvContents);
+                        break;
+
+                    case 4:
+                        dataProcessor.printBreakdownByPayor(csvContents);
+                        break;
+
+                    case 5: //todo - next method here
                         break;
 
                     case 0:
