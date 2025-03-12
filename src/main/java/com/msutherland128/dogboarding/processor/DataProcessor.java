@@ -11,17 +11,17 @@ public class DataProcessor {
 
     public void printAllData(ArrayList<CsvContents> csvContents) {
         System.out.println("Printing all data:");
-        for(CsvContents row : csvContents) {
+        for (CsvContents row : csvContents) {
             System.out.println(row.toString());
         }
     }
 
     public double printAverageCost(ArrayList<CsvContents> csvContents) {
         double runningTotal = 0;
-        for(CsvContents row : csvContents) {
+        for (CsvContents row : csvContents) {
             runningTotal += row.getCost();
         }
-        double averageCost = runningTotal/csvContents.size();
+        double averageCost = runningTotal / csvContents.size();
         System.out.println("The average cost is: £" + averageCost);
 
         return averageCost;
@@ -34,31 +34,23 @@ public class DataProcessor {
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
 
-        int counter = 0;
         double totalPerDog = 0;
+        int counter = 0;
 
         for (CsvContents row : csvContents) {
-            counter++;
             if (userInput.equalsIgnoreCase(row.getName())) {
-                boolean x = userInput.equalsIgnoreCase(row.getName());
-                while (x) {
-                    totalPerDog += row.getCost();
-                    x = false;
-                }
+                totalPerDog += row.getCost();
+            } else {
+                counter++;
             }
-            else if (counter == csvContents.size()){
-                System.out.println("No record of " + userInput + " in file.");
-                break;
-            }
-
         }
 
-        System.out.println("The total cost for " + userInput + " is £" + totalPerDog);
-
-
+        if (counter == csvContents.size()){
+            System.out.println("No dog by name " + userInput + " found in file.");
+        } else {
+            System.out.println("The total cost for " + userInput + " is £" + totalPerDog);
+        }
 
     }
-
-
 
 }

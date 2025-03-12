@@ -39,7 +39,7 @@ public class MainMenu implements Processor {
                 System.out.println("+-----------------------------+");
                 System.out.println("| 1. List all Data            |");
                 System.out.println("| 2. Average Cost             |");
-                System.out.println("| 3. Average cost by Dog name |");
+                System.out.println("| 3. Total per Dog            |");
                 System.out.println("| 0. Exit                     |");
                 System.out.println("+-----------------------------+");
 
