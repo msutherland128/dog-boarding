@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 @Component
 public class DataProcessor {
@@ -80,11 +81,18 @@ public class DataProcessor {
 
         ArrayList<String> updatedDogsList = removeDuplicates(dogs);
 
+        // StringJoiner used to remove [] from printed list and comma separate with white space
+        StringJoiner updatedDogsListJoiner = new StringJoiner(", ");
+
+        for (String dog : updatedDogsList) {
+            updatedDogsListJoiner.add(dog);
+        }
+
         if (counter == csvContents.size()){
             System.out.println("No payor by name " + userInput + " found in file.");
         } else {
             System.out.println("The total cost for payor " + userInput + " is £" + totalCost);
-            System.out.println("The dogs associated to payor " + userInput + " are: " + updatedDogsList);
+            System.out.println("The dogs associated to payor " + userInput + " are: " + updatedDogsListJoiner);
         }
 
     }
