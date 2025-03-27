@@ -3,10 +3,7 @@ package com.msutherland128.dogboarding.processor;
 import com.msutherland128.dogboarding.model.CsvContents;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Scanner;
-import java.util.StringJoiner;
+import java.util.*;
 
 @Component
 public class DataProcessor {
@@ -60,19 +57,21 @@ public class DataProcessor {
 
     }
 
-    public void printBreakdownByPayor(ArrayList<CsvContents> csvContents) {
+    public void printBreakdownByProvider(ArrayList<CsvContents> csvContents) {
 
-        System.out.print("Please enter the payor name: ");
+        System.out.print("Please enter the provider name: ");
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
 
         int counter = 0;
+        double totalCostPerProvider = 0;
         double totalCost = 0;
         ArrayList<String> dogs = new ArrayList<>();
 
         for (CsvContents row : csvContents) {
-            if (userInput.equalsIgnoreCase(row.getPayor())) {
-                totalCost += row.getCost();
+            totalCost += row.getCost();
+            if (userInput.equalsIgnoreCase(row.getProvider())) {
+                totalCostPerProvider += row.getCost();
                 dogs.add(row.getName());
             } else {
                 counter++;
@@ -89,20 +88,47 @@ public class DataProcessor {
         }
 
         if (counter == csvContents.size()){
-            System.out.println("No payor by name " + userInput + " found in file.");
+            System.out.println("No provider by name " + userInput + " found in file.");
         } else {
-            System.out.println("The total cost for payor " + userInput + " is £" + totalCost);
-            System.out.println("The dogs associated to payor " + userInput + " are: " + updatedDogsListJoiner);
+            float percentageOfTotal = (float) (totalCostPerProvider / totalCost * 100);
+            System.out.println("The total amount made for " + userInput + " provider is £" + totalCostPerProvider);
+            System.out.print("The amount made for " + userInput + " is ");
+            System.out.printf("%.2f", percentageOfTotal);
+            System.out.println(" % of the total amount made: " + totalCost);
+            System.out.println("The dogs associated to " + userInput  + " provider are: " + updatedDogsListJoiner);
         }
 
     }
 
-    private <T>ArrayList<T> removeDuplicates(ArrayList<T> dogsArrayList) {
+    public void printSummaryByProvider(ArrayList<CsvContents> csvContents) {
+
+        /* todo - method should:
+        print provider name
+        total amount made per provider
+        percentage of the gross total per provider
+        fees charged per provider (only to be inc if fees > 0)
+         */
+        System.out.println("Summary of providers:");
+
+        // todo needs work.. need to be able to get providers into a hashset (only unique values) and get a running total per provider
+        ArrayList<String> providerList = new ArrayList<>();
+        for (CsvContents row : csvContents) {
+            providerList.add(row.getProvider());
+        }
+
+        System.out.println(providerList);
+
+        ArrayList<String> updatedProviderList = removeDuplicates(providerList);
+        System.out.println(updatedProviderList);
+
+    }
+
+    private <T>ArrayList<T> removeDuplicates(ArrayList<T> arrayList) {
         LinkedHashSet<T> set = new LinkedHashSet<>();
-        set.addAll(dogsArrayList);
-        dogsArrayList.clear();
-        dogsArrayList.addAll(set);
-        return dogsArrayList;
+        set.addAll(arrayList);
+        arrayList.clear();
+        arrayList.addAll(set);
+        return arrayList;
     }
 
 }

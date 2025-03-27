@@ -8,7 +8,7 @@ public class CsvContents {
     private String name;
     private String date;
     private Double cost;
-    private String payor;
+    private String provider;
 
 
     public String getName() {
@@ -35,12 +35,12 @@ public class CsvContents {
         this.cost = cost;
     }
 
-    public String getPayor() {
-        return payor;
+    public String getProvider() {
+        return provider;
     }
 
-    public void setPayor(String payor) {
-        this.payor = payor;
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 
     @Override
@@ -48,6 +48,6 @@ public class CsvContents {
         return  "Dog Name: " + name +
                 ", Boarding Date: " + date +
                 ", Cost: £" + cost +
-                ", Payor: " + payor;
+                ", Provider: " + provider;
     }
 }
