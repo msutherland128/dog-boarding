@@ -39,9 +39,10 @@ public class MainMenu implements Processor {
                 System.out.println("+-----------------------------+");
                 System.out.println("| 1. List all Data            |");
                 System.out.println("| 2. Average Cost             |");
-                System.out.println("| 3. Total per Dog            |");
-                System.out.println("| 4. Breakdown by Provider    |");
-                System.out.println("| 5. Summary by Provider      |");
+                System.out.println("| 3. Total Earned             |");
+                System.out.println("| 4. Total per Dog            |");
+                System.out.println("| 5. Breakdown by Provider    |");
+                System.out.println("| 6. Summary by Provider      |");
                 System.out.println("| 0. Exit                     |");
                 System.out.println("+-----------------------------+");
 
@@ -60,14 +61,18 @@ public class MainMenu implements Processor {
                         break;
 
                     case 3:
-                        dataProcessor.printTotalCostPerDog(csvContents);
+                        dataProcessor.printTotalEarned(csvContents);
                         break;
 
                     case 4:
+                        dataProcessor.printTotalCostPerDog(csvContents);
+                        break;
+
+                    case 5:
                         dataProcessor.printBreakdownByProvider(csvContents);
                         break;
 
-                    case 5: //todo - next method here
+                    case 6: //todo - next method here
                         dataProcessor.printSummaryByProvider(csvContents);
                         break;
 
