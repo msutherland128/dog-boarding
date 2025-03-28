@@ -14,10 +14,12 @@ public class MainMenu implements Processor {
 
     private CsvContents csvContents;
     private DataProcessor dataProcessor;
+    private TotalsMenu totalsMenu;
 
-    public MainMenu(CsvContents csvContents, DataProcessor dataProcessor) {
+    public MainMenu(CsvContents csvContents, DataProcessor dataProcessor, TotalsMenu totalsMenu) {
         this.csvContents = csvContents;
         this.dataProcessor = dataProcessor;
+        this.totalsMenu = totalsMenu;
     }
 
     @Override
@@ -37,6 +39,7 @@ public class MainMenu implements Processor {
             while (continueMenu) {
 
                 System.out.println("+-----------------------------+");
+                System.out.println("|          Main Menu          |");
                 System.out.println("| 1. List all Data            |");
                 System.out.println("| 2. Average Cost             |");
                 System.out.println("| 3. Total Earned             |");
@@ -61,7 +64,7 @@ public class MainMenu implements Processor {
                         break;
 
                     case 3:
-                        dataProcessor.printTotalEarned(csvContents);
+                        totalsMenu.totalsMenuOptions(csvContents);
                         break;
 
                     case 4:
@@ -80,6 +83,9 @@ public class MainMenu implements Processor {
                         System.out.println("Exiting menu.");
                         continueMenu = false;
                         break;
+
+                    default:
+                        System.out.println("Invalid input. Please enter options 0 to 6.");
                 }
 
             }

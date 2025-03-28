@@ -31,36 +31,24 @@ public class DataProcessor {
 
     }
 
-    public void printTotalEarned(ArrayList<CsvContents> csvContents) {
+    public void printTotalEarned(ArrayList<CsvContents> csvContents, int userSelection) {
 
-        // todo - move total menu option to another class to be called from MainMenu? Leave only methods in DataProcessor?
-        System.out.println("Select an option:");
-        System.out.println("+--------------------------------+");
-        System.out.println("| 1. Total Earned (inc fees)     |");
-        System.out.println("| 2. Total Earned (without fees) |");
-        System.out.println("| 3. Total Fees Paid             |");
-        System.out.println("| 4. Total Per Year              |");
-        System.out.println("| 5. Return to Main Menu         |");
-        System.out.println("+--------------------------------+");
-
-        Scanner totalScanner = new Scanner(System.in);
-        int userSelection = totalScanner.nextInt();
-
-        switch(userSelection) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-        }
         double totalWithoutFees = 0;
         double totalWithFees = 0;
         double totalFeesPaid = 0;
+        // todo loop here
+        for(CsvContents row : csvContents){
+
+        }
+
+        // todo logic here using user input
+        if(userSelection == 1){
+            // do something
+        } else if (userSelection == 2) {
+            // do something else
+        } else if (userSelection == 3){
+            // do something else else
+        }
 
     }
 

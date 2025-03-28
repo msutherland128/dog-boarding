@@ -8,6 +8,7 @@ public class CsvContents {
     private String name;
     private String date;
     private Double cost;
+    private Double fees;
     private String provider;
 
 
@@ -35,6 +36,14 @@ public class CsvContents {
         this.cost = cost;
     }
 
+    public Double getFees() {
+        return fees;
+    }
+
+    public void setFees(Double fees) {
+        this.fees = fees;
+    }
+
     public String getProvider() {
         return provider;
     }
@@ -48,6 +57,7 @@ public class CsvContents {
         return  "Dog Name: " + name +
                 ", Boarding Date: " + date +
                 ", Cost: £" + cost +
+                ", Fees: £" + fees +
                 ", Provider: " + provider;
     }
 }
