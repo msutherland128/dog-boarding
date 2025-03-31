@@ -34,20 +34,19 @@ public class DataProcessor {
     public void printTotalEarned(ArrayList<CsvContents> csvContents, int userSelection) {
 
         double totalWithoutFees = 0;
-        double totalWithFees = 0;
         double totalFeesPaid = 0;
-        // todo loop here
         for(CsvContents row : csvContents){
-
+            totalFeesPaid += row.getFees();
+            totalWithoutFees += row.getCost();
         }
 
-        // todo logic here using user input
-        if(userSelection == 1){
-            // do something
+        if (userSelection == 1) {
+            double totalWithFees = totalWithoutFees + totalFeesPaid;
+            System.out.println("Total with fees is: £" + totalWithFees);
         } else if (userSelection == 2) {
-            // do something else
-        } else if (userSelection == 3){
-            // do something else else
+            System.out.println("Total without fees is: £" + totalWithoutFees);
+        } else if (userSelection == 3) {
+            System.out.println("Total fees paid is: £" + totalFeesPaid);
         }
 
     }

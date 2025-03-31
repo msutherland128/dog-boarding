@@ -23,7 +23,6 @@ public class TotalsMenu {
         boolean continueTotalMenu = true;
         while (continueTotalMenu) {
 
-            System.out.println("Select an option:");
             System.out.println("+--------------------------------+");
             System.out.println("|           Totals Menu          |");
             System.out.println("| 1. Total Earned (inc fees)     |");
@@ -33,24 +32,18 @@ public class TotalsMenu {
             System.out.println("| 5. Return to Main Menu         |");
             System.out.println("+--------------------------------+");
 
+            System.out.print("Please enter your option: ");
+
             Scanner totalScanner = new Scanner(System.in);
             int userSelection = totalScanner.nextInt();
 
-            switch(userSelection) {
-                case 1:
-                    break;
-                case 2:
-                    dataProcessor.printTotalEarned(csvContents, userSelection);
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    continueTotalMenu = false;
-                    break;
-                default:
-                    System.out.println("Invalid input. Please enter options 1 to 5.");
+            if (userSelection == 1 || userSelection == 2 || userSelection == 3) {
+                dataProcessor.printTotalEarned(csvContents, userSelection);
+            } else if (userSelection == 5) {
+                System.out.println("Returning to Main Menu.");
+                continueTotalMenu = false;
+            } else {
+                System.out.println("Invalid input. Please enter options 1 to 5.");
             }
 
         }

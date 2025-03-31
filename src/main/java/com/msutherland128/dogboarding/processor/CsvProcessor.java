@@ -39,8 +39,9 @@ public class CsvProcessor implements Processor {
                             csvrow.setDate(csvColumns[y]);
                         } else if (y == 2) {
                             csvrow.setCost(Double.valueOf(csvColumns[y]));
+                            // todo - handle null values in fees column
                         } else if (y == 3) {
-                            csvrow.setFees(Double.valueOf(csvColumns[y]));
+                                csvrow.setFees(Double.valueOf(csvColumns[y]));
                         } else if (y == 4) {
                             csvrow.setProvider(csvColumns[y]);
                         }
