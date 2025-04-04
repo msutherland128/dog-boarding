@@ -3,6 +3,8 @@ package com.msutherland128.dogboarding.processor;
 import com.msutherland128.dogboarding.model.CsvContents;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
@@ -47,6 +49,18 @@ public class DataProcessor {
             System.out.println("Total without fees is: £" + totalWithoutFees);
         } else if (userSelection == 3) {
             System.out.println("Total fees paid is: £" + totalFeesPaid);
+        }
+
+    }
+
+    public void printTotalPerYear(ArrayList<CsvContents> csvContents) throws ParseException {
+
+        double totalPerYear;
+        for (CsvContents row : csvContents){
+            String dateFromFile = row.getDate();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = dateFormat.parse(dateFromFile);
+            System.out.println("*** Printing formatted date from file to test: " + new SimpleDateFormat("yyyy").format(date) + " ***");
         }
 
     }
@@ -114,7 +128,7 @@ public class DataProcessor {
             System.out.println("The total amount made for " + userInput + " provider is £" + totalCostPerProvider);
             System.out.print("The amount made for " + userInput + " is ");
             System.out.printf("%.2f", percentageOfTotal);
-            System.out.println(" % of the total amount made: " + totalCost);
+            System.out.println(" % of the total amount made: £" + totalCost);
             System.out.println("The dogs associated to " + userInput  + " provider are: " + updatedDogsListJoiner);
         }
 

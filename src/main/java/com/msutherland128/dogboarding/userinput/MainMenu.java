@@ -6,6 +6,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,7 +33,7 @@ public class MainMenu implements Processor {
 
     }
 
-    private ArrayList<CsvContents> mainMenuOptions(ArrayList<CsvContents> csvContents) {
+    private ArrayList<CsvContents> mainMenuOptions(ArrayList<CsvContents> csvContents) throws ParseException {
 
             boolean continueMenu = true;
 
@@ -75,7 +76,7 @@ public class MainMenu implements Processor {
                         dataProcessor.printBreakdownByProvider(csvContents);
                         break;
 
-                    case 6: //todo - next method here
+                    case 6: //todo - needs work
                         dataProcessor.printSummaryByProvider(csvContents);
                         break;
 
