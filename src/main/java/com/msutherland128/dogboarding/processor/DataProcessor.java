@@ -3,7 +3,6 @@ package com.msutherland128.dogboarding.processor;
 import com.msutherland128.dogboarding.model.CsvContents;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
@@ -55,24 +54,37 @@ public class DataProcessor {
 
     }
 
-    public void printTotalPerYear(ArrayList<CsvContents> csvContents) throws ParseException {
+    public void printTotalPerYear(ArrayList<CsvContents> csvContents) {
 
         System.out.print("Please enter the year: ");
 
-        Scanner scanner = new Scanner(System.in);
-        String userInputYear = scanner.nextLine();
+        try {
 
-        double totalPerYear;
+            Scanner scanner = new Scanner(System.in);
+            String userInputYear = scanner.nextLine();
+
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter yearFormatter = DateTimeFormatter.ofPattern("yyyy");
+
+            Year userInput = Year.parse(userInputYear, yearFormatter);
+
+        double totalPerYear = 0;
         for (CsvContents row : csvContents) {
             String dateFromFile = row.getDate();
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            DateTimeFormatter yearFormatter = DateTimeFormatter.ofPattern("yyyy");
-            LocalDate fromFile = LocalDate.parse(dateFromFile, dateTimeFormatter);
-            Year someInput = Year.parse(userInputYear, yearFormatter);
-            if (fromFile.getYear() == someInput.getValue()) {
-                System.out.println("Match on year " + fromFile);
+            LocalDate fromFile = LocalDate.parse(dateFromFile, dateFormatter);
+            if (fromFile.getYear() == userInput.getValue()) {
+                totalPerYear += row.getCost();
             }
+        }
 
+        if (totalPerYear > 0.0) {
+            System.out.println("Total for year " + userInputYear + " is: £" + totalPerYear);
+        } else {
+            System.out.println("No data for year: " + userInputYear);
+        }
+
+        } catch (Exception e) {
+            System.out.println("Invalid year entered. Ensure this is numeric, containing only 4 digits and formatted correctly yyyy.");
         }
 
     }

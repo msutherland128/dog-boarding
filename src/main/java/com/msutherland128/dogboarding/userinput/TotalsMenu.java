@@ -31,7 +31,7 @@ public class TotalsMenu {
             System.out.println("| 1. Total Earned (inc fees)     |");
             System.out.println("| 2. Total Earned (without fees) |");
             System.out.println("| 3. Total Fees Paid             |");
-            System.out.println("| 4. Total Per Date Option       |");
+            System.out.println("| 4. Total Per Date              |");
             System.out.println("| 5. Return to Main Menu         |");
             System.out.println("+--------------------------------+");
 

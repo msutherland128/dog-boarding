@@ -43,7 +43,6 @@ public class DateMenu {
                     // todo - Total Earned Per Month
                     break;
                 case 2:
-                    // todo - Total Earned Per Year
                     dataProcessor.printTotalPerYear(csvContents);
                     break;
                 case 3:
