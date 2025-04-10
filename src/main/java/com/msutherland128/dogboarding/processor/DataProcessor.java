@@ -4,7 +4,9 @@ import com.msutherland128.dogboarding.model.CsvContents;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Component
@@ -55,12 +57,22 @@ public class DataProcessor {
 
     public void printTotalPerYear(ArrayList<CsvContents> csvContents) throws ParseException {
 
+        System.out.print("Please enter the year: ");
+
+        Scanner scanner = new Scanner(System.in);
+        String userInputYear = scanner.nextLine();
+
         double totalPerYear;
-        for (CsvContents row : csvContents){
+        for (CsvContents row : csvContents) {
             String dateFromFile = row.getDate();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = dateFormat.parse(dateFromFile);
-            System.out.println("*** Printing formatted date from file to test: " + new SimpleDateFormat("yyyy").format(date) + " ***");
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter yearFormatter = DateTimeFormatter.ofPattern("yyyy");
+            LocalDate fromFile = LocalDate.parse(dateFromFile, dateTimeFormatter);
+            Year someInput = Year.parse(userInputYear, yearFormatter);
+            if (fromFile.getYear() == someInput.getValue()) {
+                System.out.println("Match on year " + fromFile);
+            }
+
         }
 
     }
