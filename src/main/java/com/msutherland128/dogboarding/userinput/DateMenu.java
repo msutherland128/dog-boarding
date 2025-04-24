@@ -41,6 +41,7 @@ public class DateMenu {
             switch (userSelection) {
                 case 1:
                     // todo - Total Earned Per Month
+                    dataProcessor.printTotalPerMonth(csvContents);
                     break;
                 case 2:
                     dataProcessor.printTotalPerYear(csvContents);

@@ -54,6 +54,97 @@ public class DataProcessor {
 
     }
 
+    public void printTotalPerMonth(ArrayList<CsvContents> csvContents) {
+
+        try {
+
+            // todo - add most profitable month logic?
+
+        System.out.print("Please enter the year: ");
+
+        Scanner scanner = new Scanner(System.in);
+        String userInputYear = scanner.nextLine();
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter yearFormatter = DateTimeFormatter.ofPattern("yyyy");
+
+        Year userInput = Year.parse(userInputYear, yearFormatter);
+
+        double januaryTotal = 0;
+        double februaryTotal = 0;
+        double marchTotal = 0;
+        double aprilTotal = 0;
+        double mayTotal = 0;
+        double juneTotal = 0;
+        double julyTotal = 0;
+        double augustTotal = 0;
+        double septemberTotal = 0;
+        double octoberTotal = 0;
+        double novemberTotal = 0;
+        double decemberTotal = 0;
+
+        for(CsvContents row : csvContents) {
+            String dateFromFile = row.getDate();
+            LocalDate fromFile = LocalDate.parse(dateFromFile, dateFormatter);
+            if (fromFile.getYear() == userInput.getValue()) {
+                ArrayList<String> monthAndAmount = new ArrayList<>();
+                monthAndAmount.add(0, String.valueOf(fromFile.getMonth()));
+                monthAndAmount.add(1, row.getCost().toString());
+
+                if (Objects.equals(monthAndAmount.get(0), "JANUARY")) {
+                    januaryTotal += Double.parseDouble(monthAndAmount.get(1));
+                } else if (Objects.equals(monthAndAmount.get(0), "FEBRUARY")) {
+                    februaryTotal += Double.parseDouble(monthAndAmount.get(1));
+                } else if (Objects.equals(monthAndAmount.get(0), "MARCH")) {
+                    marchTotal += Double.parseDouble(monthAndAmount.get(1));
+                } else if (Objects.equals(monthAndAmount.get(0), "APRIL")) {
+                    aprilTotal += Double.parseDouble(monthAndAmount.get(1));
+                } else if (Objects.equals(monthAndAmount.get(0), "MAY")) {
+                    mayTotal += Double.parseDouble(monthAndAmount.get(1));
+                } else if (Objects.equals(monthAndAmount.get(0), "JUNE")) {
+                    juneTotal += Double.parseDouble(monthAndAmount.get(1));
+                } else if (Objects.equals(monthAndAmount.get(0), "JULY")) {
+                    julyTotal += Double.parseDouble(monthAndAmount.get(1));
+                } else if (Objects.equals(monthAndAmount.get(0), "AUGUST")) {
+                    augustTotal += Double.parseDouble(monthAndAmount.get(1));
+                } else if (Objects.equals(monthAndAmount.get(0), "SEPTEMBER")) {
+                    septemberTotal += Double.parseDouble(monthAndAmount.get(1));
+                } else if (Objects.equals(monthAndAmount.get(0), "OCTOBER")) {
+                    octoberTotal += Double.parseDouble(monthAndAmount.get(1));
+                } else if (Objects.equals(monthAndAmount.get(0), "NOVEMBER")) {
+                    novemberTotal += Double.parseDouble(monthAndAmount.get(1));
+                } else if (Objects.equals(monthAndAmount.get(0), "DECEMBER")) {
+                    decemberTotal += Double.parseDouble(monthAndAmount.get(1));
+                }
+            }
+        }
+
+        if (januaryTotal > 0.0 || februaryTotal > 0.0 || marchTotal > 0.0 || aprilTotal > 0.0 || mayTotal > 0.0 || juneTotal > 0.0 || julyTotal > 0.0
+                || augustTotal > 0.0 || septemberTotal > 0.0 || octoberTotal > 0.0 || novemberTotal > 0.0 || decemberTotal > 0.0) {
+            System.out.println("January " + userInput + " Total is: £" + januaryTotal);
+            System.out.println("February " + userInput + " Total is: £" + februaryTotal);
+            System.out.println("March " + userInput + " Total is: £" + marchTotal);
+            System.out.println("April " + userInput + " Total is: £" + aprilTotal);
+            System.out.println("May " + userInput + " Total is: £" + mayTotal);
+            System.out.println("June " + userInput + " Total is: £" + juneTotal);
+            System.out.println("July " + userInput + " Total is: £" + julyTotal);
+            System.out.println("August " + userInput + " Total is: £" + augustTotal);
+            System.out.println("September " + userInput + " Total is: £" + septemberTotal);
+            System.out.println("October " + userInput + " Total is: £" + octoberTotal);
+            System.out.println("November " + userInput + " Total is: £" + novemberTotal);
+            System.out.println("December " + userInput + " Total is: £" + decemberTotal);
+        } else {
+            System.out.println("No data for year: " + userInput);
+        }
+
+
+
+        } catch (Exception e) {
+            System.out.println("Invalid year entered. Ensure this is numeric, containing only 4 digits and formatted correctly yyyy.");
+        }
+
+    }
+
     public void printTotalPerYear(ArrayList<CsvContents> csvContents) {
 
         System.out.print("Please enter the year: ");
@@ -78,9 +169,9 @@ public class DataProcessor {
         }
 
         if (totalPerYear > 0.0) {
-            System.out.println("Total for year " + userInputYear + " is: £" + totalPerYear);
+            System.out.println("Total for " + userInputYear + " is: £" + totalPerYear);
         } else {
-            System.out.println("No data for year: " + userInputYear);
+            System.out.println("No data for : " + userInputYear);
         }
 
         } catch (Exception e) {
