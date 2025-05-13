@@ -3,7 +3,11 @@ package com.msutherland128.dogboarding.processor;
 import com.msutherland128.dogboarding.model.CsvContents;
 import org.springframework.stereotype.Component;
 
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -137,8 +141,6 @@ public class DataProcessor {
             System.out.println("No data for year: " + userInput);
         }
 
-
-
         } catch (Exception e) {
             System.out.println("Invalid year entered. Ensure this is numeric, containing only 4 digits and formatted correctly yyyy.");
         }
@@ -177,6 +179,29 @@ public class DataProcessor {
         } catch (Exception e) {
             System.out.println("Invalid year entered. Ensure this is numeric, containing only 4 digits and formatted correctly yyyy.");
         }
+
+    }
+
+    public void printTotalForCurrentMonth(ArrayList<CsvContents> csvContents) throws ParseException {
+
+        Format monthFormatter = new SimpleDateFormat("MM");
+        Format yearFormatter = new SimpleDateFormat("yyyy");
+        String currentMonth = monthFormatter.format(new Date());
+        String currentYear = yearFormatter.format(new Date());
+
+        double totalForCurrentMonth = 0;
+        for (CsvContents row : csvContents) {
+
+            String dateFromFile = row.getDate();
+            Date formattedDate = new SimpleDateFormat("dd/MM/yyyy").parse(dateFromFile);
+
+            if (monthFormatter.format(formattedDate).equals(currentMonth) && yearFormatter.format(formattedDate).equals(currentYear)) {
+                totalForCurrentMonth += row.getCost();
+            }
+        }
+
+        Month month = Month.of(Integer.parseInt(currentMonth));
+        System.out.println("Total for current month " + month + " " + currentYear + " is: £" + totalForCurrentMonth);
 
     }
 
