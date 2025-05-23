@@ -6,10 +6,13 @@ import org.springframework.stereotype.Component;
 public class CsvContents {
 
     private String name;
-    private String date;
+    private String dateFrom;
+    private String dateTo;
+    private String paymentDate;
+    private String provider;
     private Double cost;
     private Double fees;
-    private String provider;
+    private String type;
 
 
     public String getName() {
@@ -20,12 +23,36 @@ public class CsvContents {
         this.name = name;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateFrom() {
+        return dateFrom;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDateFrom(String dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public String getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(String dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public String getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(String paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
     }
 
     public Double getCost() {
@@ -44,20 +71,23 @@ public class CsvContents {
         this.fees = fees;
     }
 
-    public String getProvider() {
-        return provider;
+    public String getType() {
+        return type;
     }
 
-    public void setProvider(String provider) {
-        this.provider = provider;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return  "Dog Name: " + name +
-                ", Boarding Date: " + date +
+                ", Boarding Date From: " + dateFrom +
+                ", Boarding Date To: " + dateTo +
+                ", Payment Date: " + paymentDate +
+                ", Provider: " + provider +
                 ", Cost: £" + cost +
                 ", Fees: £" + fees +
-                ", Provider: " + provider;
+                ", Type: " + type;
     }
 }

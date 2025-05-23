@@ -36,14 +36,20 @@ public class CsvProcessor implements Processor {
                         if (y == 0) {
                             csvrow.setName(csvColumns[y]);
                         } else if (y == 1) {
-                            csvrow.setDate(csvColumns[y]);
+                            csvrow.setDateFrom(csvColumns[y]);
                         } else if (y == 2) {
-                            csvrow.setCost(Double.valueOf(csvColumns[y]));
-                            // todo - handle null values in fees column
+                            csvrow.setDateTo(csvColumns[y]);
                         } else if (y == 3) {
-                                csvrow.setFees(Double.valueOf(csvColumns[y]));
+                            csvrow.setPaymentDate(csvColumns[y]);
                         } else if (y == 4) {
                             csvrow.setProvider(csvColumns[y]);
+                        } else if (y == 5) {
+                            csvrow.setCost(Double.valueOf(csvColumns[y]));
+                            // todo - handle null values in fees column
+                        } else if (y == 6) {
+                            csvrow.setFees(Double.valueOf(csvColumns[y]));
+                        } else if (y == 7) {
+                            csvrow.setType(csvColumns[y]);
                         }
                     }
                     csvContents.add(csvrow);

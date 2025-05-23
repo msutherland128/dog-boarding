@@ -88,7 +88,7 @@ public class DataProcessor {
         double decemberTotal = 0;
 
         for(CsvContents row : csvContents) {
-            String dateFromFile = row.getDate();
+            String dateFromFile = row.getDateFrom();
             LocalDate fromFile = LocalDate.parse(dateFromFile, dateFormatter);
             if (fromFile.getYear() == userInput.getValue()) {
                 ArrayList<String> monthAndAmount = new ArrayList<>();
@@ -163,7 +163,7 @@ public class DataProcessor {
 
         double totalPerYear = 0;
         for (CsvContents row : csvContents) {
-            String dateFromFile = row.getDate();
+            String dateFromFile = row.getDateFrom();
             LocalDate fromFile = LocalDate.parse(dateFromFile, dateFormatter);
             if (fromFile.getYear() == userInput.getValue()) {
                 totalPerYear += row.getCost();
@@ -192,7 +192,7 @@ public class DataProcessor {
         double totalForCurrentMonth = 0;
         for (CsvContents row : csvContents) {
 
-            String dateFromFile = row.getDate();
+            String dateFromFile = row.getDateFrom();
             Date formattedDate = new SimpleDateFormat("dd/MM/yyyy").parse(dateFromFile);
 
             if (monthFormatter.format(formattedDate).equals(currentMonth) && yearFormatter.format(formattedDate).equals(currentYear)) {
