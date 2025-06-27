@@ -1,6 +1,7 @@
 package com.msutherland128.dogboarding.processor;
 
 import com.msutherland128.dogboarding.model.CsvContents;
+import com.msutherland128.dogboarding.utils.DataProcessorOperations;
 import org.springframework.stereotype.Component;
 
 import java.text.Format;
@@ -15,11 +16,14 @@ import java.util.*;
 @Component
 public class DataProcessor {
 
-//    private Scanner scanner;
-//
-//    public DataProcessor(Scanner scanner) {
-//        this.scanner = scanner;
-//    }
+
+    private DataProcessorOperations dataProcessorOperations;
+    
+    public DataProcessor(DataProcessorOperations dataProcessorOperations) {
+        this.dataProcessorOperations = dataProcessorOperations;
+    }
+    
+    
 
     public void printAllData(ArrayList<CsvContents> csvContents) {
         System.out.println("Printing all data:");
@@ -34,7 +38,7 @@ public class DataProcessor {
             runningTotal += row.getCost();
         }
         double averageCost = runningTotal / csvContents.size();
-        System.out.println("The average cost is: £" + averageCost);
+        System.out.println("The average cost is: £" + dataProcessorOperations.bigDecimalConversion(averageCost));
 
     }
 
@@ -49,11 +53,11 @@ public class DataProcessor {
 
         if (userSelection == 1) {
             double totalWithFees = totalWithoutFees + totalFeesPaid;
-            System.out.println("Total with fees is: £" + totalWithFees);
+            System.out.println("Total with fees is: £" + dataProcessorOperations.bigDecimalConversion(totalWithFees));
         } else if (userSelection == 2) {
-            System.out.println("Total without fees is: £" + totalWithoutFees);
+            System.out.println("Total without fees is: £" + dataProcessorOperations.bigDecimalConversion(totalWithoutFees));
         } else if (userSelection == 3) {
-            System.out.println("Total fees paid is: £" + totalFeesPaid);
+            System.out.println("Total fees paid is: £" + dataProcessorOperations.bigDecimalConversion(totalFeesPaid));
         }
 
     }
@@ -125,18 +129,18 @@ public class DataProcessor {
 
         if (januaryTotal > 0.0 || februaryTotal > 0.0 || marchTotal > 0.0 || aprilTotal > 0.0 || mayTotal > 0.0 || juneTotal > 0.0 || julyTotal > 0.0
                 || augustTotal > 0.0 || septemberTotal > 0.0 || octoberTotal > 0.0 || novemberTotal > 0.0 || decemberTotal > 0.0) {
-            System.out.println("January " + userInput + " Total is: £" + januaryTotal);
-            System.out.println("February " + userInput + " Total is: £" + februaryTotal);
-            System.out.println("March " + userInput + " Total is: £" + marchTotal);
-            System.out.println("April " + userInput + " Total is: £" + aprilTotal);
-            System.out.println("May " + userInput + " Total is: £" + mayTotal);
-            System.out.println("June " + userInput + " Total is: £" + juneTotal);
-            System.out.println("July " + userInput + " Total is: £" + julyTotal);
-            System.out.println("August " + userInput + " Total is: £" + augustTotal);
-            System.out.println("September " + userInput + " Total is: £" + septemberTotal);
-            System.out.println("October " + userInput + " Total is: £" + octoberTotal);
-            System.out.println("November " + userInput + " Total is: £" + novemberTotal);
-            System.out.println("December " + userInput + " Total is: £" + decemberTotal);
+            System.out.println("January " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(januaryTotal));
+            System.out.println("February " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(februaryTotal));
+            System.out.println("March " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(marchTotal));
+            System.out.println("April " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(aprilTotal));
+            System.out.println("May " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(mayTotal));
+            System.out.println("June " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(juneTotal));
+            System.out.println("July " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(julyTotal));
+            System.out.println("August " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(augustTotal));
+            System.out.println("September " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(septemberTotal));
+            System.out.println("October " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(octoberTotal));
+            System.out.println("November " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(novemberTotal));
+            System.out.println("December " + userInput + " Total is: £" + dataProcessorOperations.bigDecimalConversion(decemberTotal));
         } else {
             System.out.println("No data for year: " + userInput);
         }
@@ -171,7 +175,7 @@ public class DataProcessor {
         }
 
         if (totalPerYear > 0.0) {
-            System.out.println("Total for " + userInputYear + " is: £" + totalPerYear);
+            System.out.println("Total for " + userInputYear + " is: £" + dataProcessorOperations.bigDecimalConversion(totalPerYear));
         } else {
             System.out.println("No data for : " + userInputYear);
         }
@@ -201,7 +205,7 @@ public class DataProcessor {
         }
 
         Month month = Month.of(Integer.parseInt(currentMonth));
-        System.out.println("Total for current month " + month + " " + currentYear + " is: £" + totalForCurrentMonth);
+        System.out.println("Total for current month " + month + " " + currentYear + " is: £" + dataProcessorOperations.bigDecimalConversion(totalForCurrentMonth));
 
     }
 
@@ -226,7 +230,7 @@ public class DataProcessor {
         if (counter == csvContents.size()){
             System.out.println("No dog by name " + userInput + " found in file.");
         } else {
-            System.out.println("The total cost for " + userInput + " is £" + totalPerDog);
+            System.out.println("The total cost for " + userInput + " is £" + dataProcessorOperations.bigDecimalConversion(totalPerDog));
         }
 
     }
@@ -252,7 +256,7 @@ public class DataProcessor {
             }
         }
 
-        ArrayList<String> updatedDogsList = removeDuplicates(dogs);
+        ArrayList<String> updatedDogsList = dataProcessorOperations.removeDuplicates(dogs);
 
         // StringJoiner used to remove [] from printed list and comma separate with white space
         StringJoiner updatedDogsListJoiner = new StringJoiner(", ");
@@ -264,11 +268,11 @@ public class DataProcessor {
         if (counter == csvContents.size()){
             System.out.println("No provider by name " + userInput + " found in file.");
         } else {
-            float percentageOfTotal = (float) (totalCostPerProvider / totalCost * 100);
-            System.out.println("The total amount made for " + userInput + " provider is £" + totalCostPerProvider);
+            double percentageOfTotal = (double) (totalCostPerProvider / totalCost * 100);
+            System.out.println("The total amount made for " + userInput + " provider is £" + dataProcessorOperations.bigDecimalConversion(totalCostPerProvider));
             System.out.print("The amount made for " + userInput + " is ");
-            System.out.printf("%.2f", percentageOfTotal);
-            System.out.println(" % of the total amount made: £" + totalCost);
+            System.out.print(dataProcessorOperations.bigDecimalConversion(percentageOfTotal));
+            System.out.println("% of the total amount made: £" + dataProcessorOperations.bigDecimalConversion(totalCost));
             System.out.println("The dogs associated to " + userInput  + " provider are: " + updatedDogsListJoiner);
         }
 
@@ -292,17 +296,9 @@ public class DataProcessor {
 
         System.out.println(providerList);
 
-        ArrayList<String> updatedProviderList = removeDuplicates(providerList);
+        ArrayList<String> updatedProviderList = dataProcessorOperations.removeDuplicates(providerList);
         System.out.println(updatedProviderList);
 
-    }
-
-    private <T>ArrayList<T> removeDuplicates(ArrayList<T> arrayList) {
-        LinkedHashSet<T> set = new LinkedHashSet<>();
-        set.addAll(arrayList);
-        arrayList.clear();
-        arrayList.addAll(set);
-        return arrayList;
     }
 
 }
