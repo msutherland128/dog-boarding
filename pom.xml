@@ -28,13 +28,6 @@
             <version>${camel.version}</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.apache.camel</groupId>-->
-<!--            <artifactId>camel-http</artifactId>-->
-<!--            <version>${camel.version}</version>-->
-<!--            &lt;!&ndash; use the same version as your Camel core version &ndash;&gt;-->
-<!--        </dependency>-->
-
         <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-spring-boot-starter -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
@@ -67,6 +60,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
